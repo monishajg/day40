@@ -38,20 +38,8 @@ export class MovieReviewsListComponent implements OnInit {
 
   }
   
-  back() {
-    // if (this.offset >= this.limit) {
-    //   this.offset -= this.limit
-    // }
-    // console.debug("new offset > " + this.offset)
-    // // trigger service
-    // this.searchSvc.getCharList(this.search, this.limit, this.offset).then(
-    //   v => this.characterList = v
-    // )
-    // console.info(this.characterList)
-  }
-  
-  next(){
-    this.router.navigate(['/comment'])
+  comment(reviewTitle: string){
+    this.router.navigate(["/comment/" + reviewTitle])
   }
   
 }

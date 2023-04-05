@@ -1,8 +1,9 @@
 <div>
-    <h1>View 0 - Search</h1>
+    <h1>Search Movie Reviews</h1>
     <form [formGroup]="searchForm" (ngSubmit)="search()">
-      <div class="row">
-        <input type="text" min="2" name="search" formControlName="search"/>
+      <div>
+        <td>Movie name:</td>
+        <input type="text" min="2" formControlName="search"/>
         <button type="submit" [disabled]="searchForm.invalid">Search</button>
       </div>
     </form>
