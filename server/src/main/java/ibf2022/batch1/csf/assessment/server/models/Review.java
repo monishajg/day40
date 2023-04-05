@@ -1,6 +1,7 @@
 package ibf2022.batch1.csf.assessment.server.models;
 
 import jakarta.json.JsonObject;
+import jakarta.json.JsonValue.ValueType;
 
 // DO NOT MODIFY THIS CLASS
 public class Review {
@@ -53,15 +54,16 @@ public class Review {
 	}
 	
 	public static Review toReview (JsonObject obj) {
-        Review Review = new Review();
-        Review.setTitle(obj.getString("display_title"));
-        Review.setRating(obj.getString("mpaa_rating"));
-        Review.setByline(obj.getString("byline"));
-        Review.setHeadline(obj.getString("headline"));
-        Review.setSummary(obj.getString("summary_short"));
-        Review.setReviewURL("%s.%s".formatted(obj.getString("link"), obj.getString("url")));
-        JsonObject multimedia = obj.getJsonObject("image");
-        Review.setImage("%s.%s".formatted(multimedia.getString("multimedia"), multimedia.getString("src")));
-        return Review;
+        Review review = new Review();
+        review.setTitle(obj.getString("display_title"));
+        review.setRating(obj.getString("mpaa_rating"));
+        review.setByline(obj.getString("byline"));
+        review.setHeadline(obj.getString("headline"));
+        review.setSummary(obj.getString("summary_short"));
+        review.setReviewURL(obj.getJsonObject("link").getString("url"));
+		if (obj.get("multimedia").getValueType() != ValueType.NULL) {
+			review.setImage(obj.getJsonObject("multimedia").getString("src"));
+		} 
+		return review;
     }
 }

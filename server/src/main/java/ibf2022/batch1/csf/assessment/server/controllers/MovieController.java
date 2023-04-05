@@ -47,7 +47,7 @@ public class MovieController {
 		// return ResponseEntity.ok(arrBuilder.build().toString());
 
 		String output = review.stream()
-				.map(v -> movieSvc.toJson(v))
+				.map(v -> toString())
 				.toList()
 				.toString();
 		return ResponseEntity
