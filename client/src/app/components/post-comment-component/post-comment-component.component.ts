@@ -41,4 +41,10 @@ export class PostCommentComponentComponent implements OnInit, OnDestroy {
       comment: this.fb.control<string>('', [Validators.required])
   })
   }
+  
+  postComment(){
+  }
+  
+  back(){
+  }
 }

@@ -1,7 +1,9 @@
 <div>
     <h1>View 2 - Comments</h1>
     <form [formGroup]="commentForm" (ngSubmit)="postComment()">
-        <h2>Post Comment for {{ review.title }}</h2>
+        <h2>Post Comment for 
+        <!-- {{ review.title }} -->
+        </h2>
         <table>
             <tr>Name: </tr>
             <tr>
@@ -20,11 +22,10 @@
             <tr>Comment:</tr>
             <tr>
                 <textarea placeholder="Type here" rows="4" cols="20" formControlName="comment">
-            </textarea>
+                </textarea>
                 <div *ngIf="isCommentFormInvalid('comment')">
                     Please enter a comment.
                 </div>
-                </td>
             </tr>
             <tr>
                 <td></td>

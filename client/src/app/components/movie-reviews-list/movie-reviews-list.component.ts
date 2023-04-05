@@ -46,4 +46,7 @@ export class MovieReviewsListComponent implements OnInit, OnDestroy {
     // console.info(this.characterList)
   }
   
+  next(){
+  }
+  
 }
