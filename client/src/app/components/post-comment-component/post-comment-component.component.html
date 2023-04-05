@@ -24,6 +24,18 @@
                 <div *ngIf="isCommentFormInvalid('comment')">
                     Please enter a comment.
                 </div>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="button" (click)="back()">
+                        Back
+                    </button>
+                    <button type="submit" [disabled]="commentForm.invalid">
+                        Post ({{ commentForm.invalid }})
+                    </button>
+                </td>
             </tr>
         </table>
     </form>

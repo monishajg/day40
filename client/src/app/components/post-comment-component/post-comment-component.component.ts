@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SearchServiceService } from 'src/app/services/search-service.service';
@@ -27,9 +27,16 @@ export class PostCommentComponentComponent implements OnInit, OnDestroy {
     this.commentForm = this.createForm()
   }
   
+  
+  
+  isCommentFormInvalid(ctrlName: string): boolean {
+    const ctrl = this.commentForm.get(ctrlName) as FormControl
+    return ctrl.invalid
+  }
+  
   private createForm(): FormGroup {
     return this.fb.group({
-      name: this.fb.control<string>('', [Validators.required]),
+      name: this.fb.control<string>('', [Validators.required, Validators.minLength(3)]),
       rating: this.fb.control<string>('', [Validators.required]),
       comment: this.fb.control<string>('', [Validators.required])
   })

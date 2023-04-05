@@ -1,10 +1,12 @@
 package ibf2022.batch1.csf.assessment.server.services;
 
+import java.io.Console;
 import java.io.StringReader;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.bson.json.JsonObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import ibf2022.batch1.csf.assessment.server.models.Review;
+import ibf2022.batch1.csf.assessment.server.repositories.MovieRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonReader;;
@@ -22,6 +25,8 @@ import jakarta.json.JsonReader;;
 @Service
 public class MovieService {
 
+    @Autowired
+    private MovieRepository movieRepo;
 	// TODO: Task 4
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
 	public static final String MOVIE_REV_API = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
@@ -31,7 +36,11 @@ public class MovieService {
 	private String privateKey;
 	
 	public List<Review> searchReviews(String query) throws NoSuchAlgorithmException {
-		String url = UriComponentsBuilder.fromUriString(MOVIE_REV_API)
+		
+		ResponseEntity<String> resp = null;
+		List<Review> rev = null;
+		String url = UriComponentsBuilder
+		.fromUriString(MOVIE_REV_API)
 		.queryParam("query",query.trim()) 
 		.queryParam("apikey", PUBLIC_KEY.trim())
 		.toUriString();
@@ -49,8 +58,8 @@ public class MovieService {
         } catch (RestClientException ex) {
             System.err.println(ex);
             // ex.printStackTrace();
-            // return Collections.EMPTY_LIST;
         }
+        
         // READ PAYLOAD
         JsonReader reader = Json.createReader(new StringReader(payload));
         JsonObject reviewResp = reader.readObject();
@@ -61,6 +70,10 @@ public class MovieService {
                 .map(v -> v.asJsonObject())
                 .map(Review::toReview)
                 .toList();
+    }
+    
+    public Integer getCount(String payload) {
+        return movieRepo.countComments(payload);
     }
 		
 }

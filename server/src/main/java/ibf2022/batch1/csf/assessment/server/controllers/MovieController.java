@@ -64,7 +64,7 @@ public class MovieController {
 		c.setTitle(form.getFirst("title"));
 		c.setName(form.getFirst("name"));
 		c.setRating(Integer.parseInt(form.getFirst("rating")));
-		c.setComment(form.getFirst("restaurantId"));
+		c.setComment(form.getFirst("comment"));
 
 		movieRepo.insertComment(c);
 	} 
