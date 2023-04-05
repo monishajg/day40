@@ -47,6 +47,7 @@ export class MovieReviewsListComponent implements OnInit, OnDestroy {
   }
   
   next(){
+    this.router.navigate(['/comment'])
   }
   
 }

@@ -46,5 +46,6 @@ export class PostCommentComponentComponent implements OnInit, OnDestroy {
   }
   
   back(){
+    this.router.navigate(['/search'])
   }
 }

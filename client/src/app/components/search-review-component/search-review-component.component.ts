@@ -22,9 +22,9 @@ export class SearchReviewComponentComponent {
   }
   
   search() {
-  console.log(">>> search()")
-    const search = this.searchForm.value['query'].trim()
-    console.debug("searchTerm > ", search)
+  
+    const search = this.searchForm.value['search']
+    console.log("searchTerm > ", search)
     this.router.navigate(['/search'], {
       queryParams: { search }
     })
