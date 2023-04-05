@@ -9,29 +9,33 @@ import { SearchServiceService } from 'src/app/services/search-service.service';
   templateUrl: './movie-reviews-list.component.html',
   styleUrls: ['./movie-reviews-list.component.css']
 })
-export class MovieReviewsListComponent implements OnInit, OnDestroy {
-  aRouteSub$!: Subscription
-  search!: string
+export class MovieReviewsListComponent implements OnInit {
+
   reviewList: Review[] = []
+  noresult: string = 'moment...'
   
   constructor(
-    private activatedRoute: ActivatedRoute,
     private searchSvc: SearchServiceService,
     private router: Router) { }
-    
-  ngOnDestroy(): void {
-    this.aRouteSub$.unsubscribe()
-  }
+
   
-  async ngOnInit() {
-    this.aRouteSub$ = this.activatedRoute.queryParams.subscribe(
-      queryparams => this.search = queryparams['search']
-    )
-    console.debug("searching for.. ", this.search)
-    // get char list promise
-    await this.searchSvc.getRevList(this.search)
-      .then(v => this.reviewList = v)
-    console.info(this.reviewList)
+  ngOnInit(): void {
+      this.searchSvc.getRevList(this.searchSvc.searched)
+        .then(response => {
+          this.reviewList = response as Review[]
+
+          // if (this.reviews.length === 0){
+          //   this.noresult = "Your search produces no result"
+          // } else {
+            this.noresult = ""
+          // }      
+        })
+        .catch((err)=>{
+          console.log(err)
+          this.noresult = "Your search produces no result"
+          console.log(this.noresult)
+        })
+
   }
   
   back() {
