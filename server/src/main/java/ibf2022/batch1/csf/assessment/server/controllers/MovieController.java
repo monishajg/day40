@@ -32,12 +32,13 @@ import jakarta.json.JsonArrayBuilder;
 public class MovieController {
 
 	// TODO: Task 3, Task 4, Task 8
+	
 	@Autowired
 	private MovieService movieSvc;
 	@Autowired
 	private MovieRepository movieRepo;
 
-	// VIEW 1
+	// TASK 3, 4
 	@GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> searchReviews(@RequestParam String query) throws NoSuchAlgorithmException {
 

@@ -4,7 +4,6 @@ import { SearchReviewComponentComponent } from './components/search-review-compo
 
 const routes: Routes = [
   { path: '', component: SearchReviewComponentComponent},
-  // { path: 'search', component: }
   { path: '**', redirectTo: '/', pathMatch:'full'}
 ];
 

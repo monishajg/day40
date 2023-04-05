@@ -1,0 +1,19 @@
+<div>
+    <button type="button" [routerLink]="['/']">Back</button>
+    <h1>View 1 - Search Result</h1>
+    <table class="table">
+      <tbody>
+        <tr class="row" *ngFor="let rev of reviewList">
+          <td class="">
+            <a class="p-3" [routerLink]="['/search/' + rev.title]">
+              {{ rev.title }}
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" (click)="back()">
+      Back
+    </button>
+    <button type="button" class="btn btn-danger" (click)="next()">Next</button>
+  </div>

@@ -6,11 +6,15 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchReviewComponentComponent } from './components/search-review-component/search-review-component.component';
+import { MovieReviewsListComponent } from './components/movie-reviews-list/movie-reviews-list.component';
+import { PostCommentComponentComponent } from './components/post-comment-component/post-comment-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchReviewComponentComponent
+    SearchReviewComponentComponent,
+    MovieReviewsListComponent,
+    PostCommentComponentComponent
   ],
   imports: [
     BrowserModule,

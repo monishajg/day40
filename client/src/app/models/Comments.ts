@@ -1,5 +1,5 @@
 export interface Comments {
-    commentId: number
+    title: string
     name: string
     rating: number
     comment: string
