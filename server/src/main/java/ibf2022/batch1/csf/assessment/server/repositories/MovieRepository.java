@@ -1,5 +1,6 @@
 package ibf2022.batch1.csf.assessment.server.repositories;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -37,14 +38,6 @@ public class MovieRepository {
 	// Write the native mongo database query in the comment below
 	// db.comments.insertOne(comments)
 	public void insertComment(Comments comments) {
-		Criteria criteria = Criteria.where("title").is(comments.getTitle());
-        Query query = new Query(criteria);
-        
-        Update updateOps = new Update().push("comments").each(comments);
-        UpdateResult updateResult = template.updateFirst(query, updateOps, COLLECTION_COMMENTS);
-        if (updateResult == null)
-            System.out.println("not updated");
-        else
-        System.out.println(updateResult.getModifiedCount()+"document(s) updated..");
+        template.insert(comments, COLLECTION_COMMENTS);
 	}
 }
