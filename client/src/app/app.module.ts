@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MainComponent } from './components/main/main.component';
+import { SearchReviewComponentComponent } from './components/search-review-component/search-review-component.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    SearchReviewComponentComponent
   ],
   imports: [
     BrowserModule,
