@@ -3,15 +3,12 @@ package ibf2022.batch1.csf.assessment.server.controllers;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import javax.print.attribute.standard.Media;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +20,6 @@ import ibf2022.batch1.csf.assessment.server.models.Comments;
 import ibf2022.batch1.csf.assessment.server.models.Review;
 import ibf2022.batch1.csf.assessment.server.repositories.MovieRepository;
 import ibf2022.batch1.csf.assessment.server.services.MovieService;
-import jakarta.json.Json;
-import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 
 @Controller
@@ -59,7 +54,9 @@ public class MovieController {
 	}
 	
 	// TODO: Task 8
-	@PostMapping(path = "/comment", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/comment"
+	// , consumes = MediaType.APPLICATION_JSON_VALUE
+	)
 	public void postComment(@RequestBody MultiValueMap<String, String> form) {
 		Comments c = new Comments();
 		c.setTitle(form.getFirst("title"));

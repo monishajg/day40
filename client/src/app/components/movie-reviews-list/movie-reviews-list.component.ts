@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Review } from 'src/app/models/Review';
 import { SearchServiceService } from 'src/app/services/search-service.service';
 
@@ -20,6 +19,7 @@ export class MovieReviewsListComponent implements OnInit {
 
   
   ngOnInit(): void {
+    console.log(">>> inside movie-review-list component...")
       this.searchSvc.getRevList(this.searchSvc.searched)
         .then(response => {
           this.reviewList = response as Review[]
@@ -28,6 +28,7 @@ export class MovieReviewsListComponent implements OnInit {
           //   this.noresult = "Your search produces no result"
           // } else {
             this.noresult = ""
+            console.log('>>> search:', this.searchSvc.searched);
           // }      
         })
         .catch((err)=>{
@@ -39,6 +40,8 @@ export class MovieReviewsListComponent implements OnInit {
   }
   
   comment(reviewTitle: string){
+    console.log(">>> clicking comment...")
+    console.log(">>> reviewTitle: ", reviewTitle)
     this.router.navigate(["/comment/" + reviewTitle])
   }
   

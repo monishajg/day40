@@ -1,20 +1,32 @@
 <div>
-    <h1>Search Result</h1>
-    <button type="button" [routerLink]="['/']">Back</button>
-    <table>
-      <tbody>
-        <tr *ngFor="let rev of reviewList">
-          <td>
-            <a [routerLink]="['/search/' + rev.title]">
-              {{ rev.title }}
-            </a>
-          </td>
-          <button type="button" (click)="comment(rev.title)">Comment</button>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <div>
-    <h2>{{noresult}}</h2>
+  <h1>Search Result</h1>
+  <button type="button" [routerLink]="['/']">Back</button>
+  <table border="solid">
+    <tbody>
+      <tr *ngFor="let rev of reviewList">
+        <td>
+          <a href="{{rev.reviewURL}}">
+            {{ rev.title }}
+          </a>
+          <tr>Rating: {{rev.rating}}</tr>
+          <tr></tr>
+          <tr>Byline: {{rev.headline}}</tr>
+          <tr></tr>
+          <tr>Headline: {{rev.byline}}</tr>
+          <tr></tr>
+          <tr>Summary: {{rev.summary}}</tr>
+        </td>
+        <td>
+          <tr>
+            <img src="{{rev.image}}" width="200" height="150"/>
+          </tr>
+        </td>
+        <button type="button" (click)="comment(rev.title)">Comment</button>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h2>{{noresult}}</h2>
 </div>

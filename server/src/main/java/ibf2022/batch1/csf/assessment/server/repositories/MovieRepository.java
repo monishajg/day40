@@ -1,14 +1,10 @@
 package ibf2022.batch1.csf.assessment.server.repositories;
 
-import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
-
-import com.mongodb.client.result.UpdateResult;
 
 import ibf2022.batch1.csf.assessment.server.models.Comments;
 

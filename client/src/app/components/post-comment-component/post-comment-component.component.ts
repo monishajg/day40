@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Comments } from 'src/app/models/Comments';
 import { SearchServiceService } from 'src/app/services/search-service.service';
 
 @Component({
@@ -12,6 +13,8 @@ import { SearchServiceService } from 'src/app/services/search-service.service';
 export class PostCommentComponentComponent implements OnInit, OnDestroy {
   commentForm!: FormGroup
   aRouteSub$!: Subscription
+  reviewTitle!: string
+  comment!: Comments
   
   constructor(
     private fb: FormBuilder,
@@ -20,11 +23,16 @@ export class PostCommentComponentComponent implements OnInit, OnDestroy {
     private router: Router) { }
 
   ngOnDestroy(): void {
-    this.aRouteSub$.unsubscribe()
+    // this.aRouteSub$.unsubscribe()
   }
   
   async ngOnInit() {
+    console.log(">>> inside post-comment-component ...")
     this.commentForm = this.createForm()
+    this.aRouteSub$ = this.activatedRoute.params.subscribe((params) => {
+      this.reviewTitle = params['title']
+    })
+    console.log(">>> reviewTitle: ", this.reviewTitle)
   }
   
   
@@ -43,9 +51,19 @@ export class PostCommentComponentComponent implements OnInit, OnDestroy {
   }
   
   postComment(){
+    console.log(">>> inside post comment...")
+    const c = {} as Comments
+    c.title = this.reviewTitle
+    c.name = this.commentForm.value.name
+    c.rating = this.commentForm.value.rating
+    c.comment = this.commentForm.value.comment
+    console.log('>>> comment object: ', c);
+    this.searchSvc.postComment(this.commentForm.value.title,this.commentForm.value.name,this.commentForm.value.rating,this.commentForm.value.comment)
+    this.router.navigate(['/search']);
   }
   
   back(){
-    this.router.navigate(['/search'])
+    console.log("searchTerm:" ,this.searchSvc.searched)
+    this.router.navigate(['/search']);
   }
 }

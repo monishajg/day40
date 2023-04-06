@@ -1,11 +1,9 @@
 package ibf2022.batch1.csf.assessment.server.services;
 
-import java.io.Console;
 import java.io.StringReader;
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +41,7 @@ public class MovieService {
 		String url = UriComponentsBuilder
 		.fromUriString(MOVIE_REV_API)
 		.queryParam("query",query.trim()) 
-		.queryParam("api-key", PUBLIC_KEY.trim())
+		.queryParam("api-key", PUBLIC_KEY)
 		.build()
 		.toUriString();
 		

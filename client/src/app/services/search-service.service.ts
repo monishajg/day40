@@ -2,8 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Review } from '../models/Review';
-import { Comments } from '../models/Comments';
-import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
