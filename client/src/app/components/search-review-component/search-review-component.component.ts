@@ -25,8 +25,8 @@ export class SearchReviewComponentComponent implements OnInit {
   }
   
   search() {
-    console.log("searchTerm > ", this.searchForm.value.movie)
-    this.searchSvc.searched = this.searchForm.value.movie
+    console.log("searchTerm > ", this.searchForm.value.search)
+    this.searchSvc.searched = this.searchForm.value.search
     this.router.navigate(["search"], {
     })
   }

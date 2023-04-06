@@ -40,16 +40,16 @@ public class MovieController {
 
 	// TASK 3, 4
 	@GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> searchReviews(@RequestParam String query) throws NoSuchAlgorithmException {
+	public ResponseEntity<List<String>> searchReviews(@RequestParam String query) throws NoSuchAlgorithmException {
 
 		List<Review> review = movieSvc.searchReviews(query);
 
 		// return ResponseEntity.ok(arrBuilder.build().toString());
 
-		String output = review.stream()
-				.map(v -> toString())
-				.toList()
-				.toString();
+		List<String> output = review.stream()
+				.map(v -> v.toString())
+				.toList();
+
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.contentType(MediaType.APPLICATION_JSON)

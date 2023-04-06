@@ -9,10 +9,10 @@
               {{ rev.title }}
             </a>
           </td>
+          <button type="button" (click)="comment(rev.title)">Comment</button>
         </tr>
       </tbody>
     </table>
-    <button type="button" (click)="comment(review.title)">Comment</button>
   </div>
   
   <div>

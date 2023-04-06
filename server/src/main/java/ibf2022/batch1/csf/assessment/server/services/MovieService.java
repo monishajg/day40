@@ -3,6 +3,7 @@ package ibf2022.batch1.csf.assessment.server.services;
 import java.io.Console;
 import java.io.StringReader;
 import java.security.NoSuchAlgorithmException;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -21,7 +22,8 @@ import ibf2022.batch1.csf.assessment.server.repositories.MovieRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
-import jakarta.json.JsonReader;;
+import jakarta.json.JsonReader;
+import jakarta.json.JsonValue.ValueType;;
 
 @Service
 public class MovieService {
@@ -38,12 +40,11 @@ public class MovieService {
 	
 	public List<Review> searchReviews(String query) throws NoSuchAlgorithmException {
 		
-		ResponseEntity<String> resp = null;
-		List<Review> rev = null;
 		String url = UriComponentsBuilder
 		.fromUriString(MOVIE_REV_API)
 		.queryParam("query",query.trim()) 
-		.queryParam("apikey", PUBLIC_KEY.trim())
+		.queryParam("api-key", PUBLIC_KEY.trim())
+		.build()
 		.toUriString();
 		
 		// REQUEST CONTAINER
@@ -64,13 +65,19 @@ public class MovieService {
         // READ PAYLOAD
         JsonReader reader = Json.createReader(new StringReader(payload));
         JsonObject reviewResp = reader.readObject();
-        JsonObject data = reviewResp.getJsonObject("data");
-        JsonArray results = data.getJsonArray("results");
-
-        return results.stream()
+        
+        if (reviewResp.get("results").getValueType() == ValueType.NULL) {
+            return Collections.emptyList();
+        }
+        else {
+            JsonArray results = reviewResp.getJsonArray("results");
+        
+        List<Review> resultList = results.stream()
                 .map(v -> v.asJsonObject())
                 .map(Review::toReview)
                 .toList();
+                return resultList;
+        }
     }
     
     public Integer getCount(String payload) {

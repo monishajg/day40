@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Review } from '../models/Review';
 import { Comments } from '../models/Comments';
+import { query } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class SearchServiceService {
   
   getRevList(search: string): Promise<Review[]> {
     let params = new HttpParams()
-      .set('search', search)
+      .set('query', search)
     // send for springboot
     return firstValueFrom(
       this.http.get<Review[]>("/api/search", { params })
