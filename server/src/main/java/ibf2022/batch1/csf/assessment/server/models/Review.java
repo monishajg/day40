@@ -1,5 +1,6 @@
 package ibf2022.batch1.csf.assessment.server.models;
 
+import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonValue.ValueType;
 
@@ -65,5 +66,18 @@ public class Review {
 			review.setImage(obj.getJsonObject("multimedia").getString("src"));
 		} 
 		return review;
+    }
+    
+    public JsonObject toJsonObject() {
+        return Json.createObjectBuilder()
+        .add("title", this.getTitle())
+        .add("rating", this.getRating())
+        .add("byline", this.getByline())
+        .add("headline", this.getHeadline())
+        .add("summary", this.getSummary())
+        .add("image", this.getImage())
+        .add("reviewURL", this.getReviewURL())
+        .build();
+        
     }
 }

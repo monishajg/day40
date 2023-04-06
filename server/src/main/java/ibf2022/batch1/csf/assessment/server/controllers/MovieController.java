@@ -25,6 +25,7 @@ import ibf2022.batch1.csf.assessment.server.repositories.MovieRepository;
 import ibf2022.batch1.csf.assessment.server.services.MovieService;
 import jakarta.json.Json;
 import jakarta.json.JsonArrayBuilder;
+import jakarta.json.JsonObject;
 
 @Controller
 @ResponseBody
@@ -40,20 +41,20 @@ public class MovieController {
 
 	// TASK 3, 4
 	@GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<String>> searchReviews(@RequestParam String query) throws NoSuchAlgorithmException {
+	public ResponseEntity<String> searchReviews(@RequestParam String query) throws NoSuchAlgorithmException {
 
 		List<Review> review = movieSvc.searchReviews(query);
 
 		// return ResponseEntity.ok(arrBuilder.build().toString());
 
-		List<String> output = review.stream()
-				.map(v -> v.toString())
+		List<JsonObject> output = review.stream()
+				.map(v -> v.toJsonObject())
 				.toList();
 
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.contentType(MediaType.APPLICATION_JSON)
-				.body(output);
+				.body(output.toString());
 
 	}
 	
